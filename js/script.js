@@ -19,7 +19,10 @@ function recursiveOddSumTo(number) {
     if (number <= 0) {
         return 0;
     }
-    return (number % 2 === 1 ? number : 0) + recursiveOddSumTo(number - 1);
+    if (number % 2 === 0) {
+        return recursiveOddSumTo(number - 1);
+    }
+    return number + recursiveOddSumTo(number - 2);
 }
 
 console.log(recursiveOddSumTo(1));
@@ -28,12 +31,12 @@ console.log(recursiveOddSumTo(10));
 
 
 //Task 3
-const isXOEqual = (str) => {
-    const lowerStr = str.toLowerCase();
+const isXOEqual = (string) => {
+    const lowerString = string.toLowerCase();
     let xCount = 0;
     let oCount = 0;
 
-    for (let symbol of lowerStr) {
+    for (let symbol of lowerString) {
         if (symbol === 'x') {
             xCount++;
         } else if (symbol === 'o') {
