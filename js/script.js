@@ -16,8 +16,7 @@ const priceData = {
 };
 
 function optimizer(data) {
-    const updatedPriceData = Object.entries(data).map(([key, value]) => [key.toLowerCase(), parseFloat(value).toFixed(2)]);
-    return Object.fromEntries(updatedPriceData);
+    return Object.fromEntries(Object.entries(data).map(([key, value]) => [key.toLowerCase(), parseFloat(value).toFixed(2)]));
 };
 
 console.log(optimizer(priceData));
@@ -25,22 +24,21 @@ console.log(optimizer(priceData));
 
 
 //Task 3
-//1 Фільтрування через умовну конструкцію всередині методу перебора (forEach):
+const vowels = ['а', 'е', 'є', 'и', 'і', 'о', 'у', 'ю', 'я', 'ї'];
 const userNames = ["Петро", "Емма", "Юстин", "Ілля", "Марта", "Яна", "Василь", "Антон", "Олена"];
 let filteredNames = [];
+
+//1 Фільтрування через умовну конструкцію всередині методу перебора (forEach):
 userNames.forEach(name => {
-    const firstLetter = name[0].toLowerCase();
-    if (["а", "е", "є", "и", "і", "о", "у", "ю", "я", "ї"].includes(firstLetter)) {
+    if (vowels.includes(name[0].toLowerCase())) {
         filteredNames.push(name);
     }
 });
 console.log(filteredNames);
 
 //2 Фільтрування через вбудований метод масивів для фільтрації
-const userNames = ["Петро", "Емма", "Юстин", "Ілля", "Марта", "Яна", "Василь", "Антон", "Олена"];
 let filteredNames = userNames.filter(name => {
-    const firstLetter = name[0].toLowerCase();
-    return ["а", "е", "є", "и", "і", "о", "у", "ю", "я", "ї"].includes(firstLetter);
+    return vowels.includes(name[0].toLowerCase());
 });
 console.log(filteredNames);
 
@@ -48,12 +46,7 @@ console.log(filteredNames);
 
 //Task 4
 const userNames = ["Петрик Ольга Іванівна", "Гнатюк Петро Антонович", "Рудко Андрій Опанасович"];
-let initials = userNames.map(name => {
-    const parts = name.split(" ");
-    const firstLetters = parts.map(part => part[0]).join(".");
-    return firstLetters;
-});
-initials.sort();
+let initials = userNames.map(name => name.split(" ").map(part => part[0]).join(".")).sort()
 console.log(initials);
 
 
@@ -63,8 +56,8 @@ function sortArray(arr) {
     if (!arr || arr.length === 0) {
         return [];
     }
-    arr.sort((a, b) => a - b);
-    return arr;
+    const sortedArray = arr.slice().sort((a, b) => a - b);
+    return sortedArray;
 }
 
 console.log(sortArray([1, 12, 10, 50, 5]));
