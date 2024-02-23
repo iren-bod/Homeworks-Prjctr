@@ -6,11 +6,7 @@ console.log(addThemAll(1, 2, 3, 4));
 console.log(addThemAll(5, 5, 10));
 
 function addThemAll(...args) {
-    let sum = 0;
-    for (let num of args) {
-        sum += num;
-    }
-    return sum;
+    return args.reduce((acc, curr) => acc + curr, 0);
 }
 
 
