@@ -5,10 +5,6 @@ function durationBetweenDates(startDateStr = '01 Jan 1995', endDateStr = '01 Jan
     let startDate = new Date(startDateStr);
     let endDate = new Date(endDateStr);
 
-    if (startDate > endDate) {
-        [startDate, endDate] = [endDate, startDate];
-    }
-
     const unitFactors = {
         seconds: 1000,
         minutes: 1000 * 60,
@@ -16,7 +12,7 @@ function durationBetweenDates(startDateStr = '01 Jan 1995', endDateStr = '01 Jan
         days: 1000 * 60 * 60 * 24
     };
 
-    const difference = (endDate - startDate) / unitFactors[unit];
+    const difference = Math.abs(endDate - startDate) / unitFactors[unit];
 
     return `${difference} ${unit}`;
 }
