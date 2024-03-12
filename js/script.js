@@ -29,16 +29,8 @@ const movies = [
 ];
 
 function byProperty(property, direction) {
-    return function compare(a, b) {
-        if (direction === '>') {
-            if (a[property] < b[property]) return -1;
-            if (a[property] > b[property]) return 1;
-            return 0;
-        } else if (direction === '<') {
-            if (a[property] > b[property]) return -1;
-            if (a[property] < b[property]) return 1;
-            return 0;
-        }
+    return function (a, b) {
+        return direction === '>' ? (a[property] > b[property] ? 1 : -1) : (a[property] < b[property] ? 1 : -1);
     };
 }
 
