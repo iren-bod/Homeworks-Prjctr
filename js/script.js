@@ -9,21 +9,32 @@ message.className = 'message';
 document.body.append(message);
 
 // Check if there is any data in localStorage and set the appropriate initial state
-let isTurnedOn = localStorage.getItem('isTurnedOn') === 'true';
+let isTurnedOn = Boolean(localStorage.getItem('isTurnedOn'));
 let lastMessage = localStorage.getItem('lastMessage') || '';
 
 // Functions
 // Function to update the state of the button and the message
 function updateState() {
-    button.textContent = isTurnedOn ? 'Turn on' : 'Turn off';
-    document.body.style.backgroundColor = isTurnedOn ? '#333' : '#f0f0f0';
+    if (isTurnedOn) {
+        button.textContent = 'Turn on';
+        document.body.classList.remove('light-theme');
+        document.body.classList.add('dark-theme');
+    } else {
+        button.textContent = 'Turn off';
+        document.body.classList.remove('dark-theme');
+        document.body.classList.add('light-theme')
+    }
     message.textContent = lastMessage;
 }
 
 // Function to handle the button click event
 const handleClick = () => {
     isTurnedOn = !isTurnedOn;
-    localStorage.setItem('isTurnedOn', isTurnedOn);
+    if (isTurnedOn) {
+        localStorage.setItem('isTurnedOn', isTurnedOn);
+    } else {
+        localStorage.removeItem('isTurnedOn');
+    }
     lastMessage = isTurnedOn ? `Last turn off: ${formatDate(new Date())}` : `Last turn on: ${formatDate(new Date())}`;
     localStorage.setItem('lastMessage', lastMessage);
     updateState();
