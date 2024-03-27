@@ -3,14 +3,37 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Homeworks</title>
-    <script src="js/script.js"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+        integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous" />
+    <title>To Do List</title>
+
+    <link rel="stylesheet" href="./css/style.css">
 </head>
 
 <body>
-    <h1>Hello there!</h1>
+    <div class="container">
+        <div class="create-task-block">
+            <form class="create-task-form">
+                <h3 class="task-title">New task</h3>
+                <div class="input-field">
+                    <input type="text" name="task" class="task-input" placeholder="add new task" />
+                </div>
+                <button type="submit" class="btn">Add new task</button>
+            </form>
+        </div>
+
+        <div class="filter-task-block">
+            <h3 class="task-title">List of tasks</h3>
+            <div class="input-field">
+                <input type="text" name="filter" class="filter-input" placeholder="task search" />
+            </div>
+            <ul class="collection"></ul>
+            <button class="clear-tasks">Delete all tasks</button>
+        </div>
+    </div>
+
+    <script src="./js/script.js"></script>
 </body>
 
 </html>
