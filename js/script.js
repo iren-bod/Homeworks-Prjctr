@@ -23,6 +23,19 @@ const clearTasksFromStorage = () => {
     localStorage.removeItem(TASKS_STORAGE_KEY);
 };
 
+const removeTaskFromStorage = (index) => {
+    const tasks = getTasksFromStorage();
+    tasks.splice(index, 1);
+    storeTasksInStorage(tasks);
+};
+
+const updateTaskInStorage = (li, newText) => {
+    const index = Array.from(taskList.children).indexOf(li);
+    const tasks = getTasksFromStorage();
+    tasks[index] = newText;
+    storeTasksInStorage(tasks);
+};
+
 // Functions for task operations
 const appendLi = (value) => {
     const li = document.createElement("li");
@@ -70,11 +83,8 @@ const removeTask = (event) => {
     const li = event.target.closest("li");
     const index = [...taskList.children].indexOf(li);
 
+    removeTaskFromStorage(index); // Remove from storage
     li.remove();
-
-    const tasks = getTasksFromStorage();
-    tasks.splice(index, 1);
-    storeTasksInStorage(tasks);
 };
 
 const editTask = (event) => {
@@ -88,16 +98,12 @@ const editTask = (event) => {
     const taskText = taskTextElement.textContent;
     let newText = prompt("Edit task:", taskText);
 
-    if (newText !== null && newText !== undefined) {
+    if (newText !== null) {
         newText = newText.trim();
 
         if (newText !== "") {
             taskTextElement.textContent = newText;
-
-            const index = Array.from(taskList.children).indexOf(li);
-            const tasks = getTasksFromStorage();
-            tasks[index] = newText;
-            storeTasksInStorage(tasks);
+            updateTaskInStorage(li, newText);
         } else {
             alert("The task text cannot be empty!");
         }
